@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nhìn Thế Giới Bằng Đôi Mắt Thơ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1208;
+    --sepia: #7a5c38;
+    --gold: #c9933a;
+    --cream: #fdf6e8;
+    --parchment: #f5e8c8;
+    --rust: #8b3a1e;
+    --moss: #4a6741;
+    --fade: #b09070;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'Lora', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-image:
+      radial-gradient(ellipse at 10% 0%, rgba(201,147,58,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 90% 100%, rgba(139,58,30,0.06) 0%, transparent 60%);
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    animation: fadeIn 1s ease both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 48px 0 32px;
+    border-bottom: 2px solid var(--gold);
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .header::before {
+    content: "✦";
+    display: block;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 12px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--rust);
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+  }
+  .header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--sepia);
+    margin-top: 10px;
+  }
+  .header .subject {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 4px 20px;
+    border: 1px solid var(--gold);
+    color: var(--fade);
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 52px;
+    animation: fadeIn 1s ease both;
+  }
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.3s; }
+  .section:nth-child(4) { animation-delay: 0.45s; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--rust);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--parchment);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::before {
+    content: attr(data-num);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  /* OBSERVATION GRID */
+  .obs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 520px) { .obs-grid { grid-template-columns: 1fr; } }
+
+  .obs-card {
+    background: var(--parchment);
+    border-left: 3px solid var(--gold);
+    padding: 16px 18px;
+    transition: transform 0.2s;
+  }
+  .obs-card:hover { transform: translateX(3px); }
+  .obs-card .q {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .obs-card .a {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  /* POEM */
+  .poem-wrapper {
+    background: var(--parchment);
+    padding: 36px 40px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(201,147,58,0.3);
+  }
+  .poem-wrapper::before, .poem-wrapper::after {
+    content: "❧";
+    display: block;
+    color: var(--gold);
+    font-size: 1.3rem;
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+  .poem-wrapper::after {
+    margin-bottom: 0;
+    margin-top: 16px;
+  }
+  .poem-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--sepia);
+    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+  }
+  .poem-line {
+    font-size: 1.05rem;
+    line-height: 2;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .poem-line:last-child { font-weight: 600; }
+  .poem-type {
+    margin-top: 20px;
+    font-size: 0.78rem;
+    color: var(--fade);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Q&A */
+  .qa-item {
+    margin-bottom: 28px;
+    padding-left: 20px;
+    border-left: 2px solid var(--parchment);
+    transition: border-color 0.25s;
+  }
+  .qa-item:hover { border-color: var(--gold); }
+  .qa-q {
+    font-weight: 600;
+    font-size: 0.97rem;
+    color: var(--sepia);
+    margin-bottom: 8px;
+    display: flex;
+    gap: 8px;
+  }
+  .qa-q .num {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .qa-a {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #2e1f0a;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 32px 0 16px;
+    border-top: 1px solid var(--parchment);
+    font-size: 0.82rem;
+    color: var(--fade);
+    letter-spacing: 0.1em;
+    font-style: italic;
+  }
+  .footer::before {
+    content: "✦  ✦  ✦";
+    display: block;
+    margin-bottom: 12px;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>Nhìn Thế Giới Bằng Đôi Mắt Thơ</h1>
+    <h2>Bài Tập Thực Hành</h2>
+    <span class="subject">Ngữ Văn 10</span>
+  </div>
+
+  <!-- PHẦN 1 -->
+  <div class="section">
+    <div class="section-title" data-num="I">Phần 1 — Phiếu Quan Sát</div>
+    <p style="margin-bottom:20px; font-style:italic; color:var(--sepia); font-size:0.9rem;">
+      Hình ảnh quan sát: <strong style="color:var(--ink)">Cây bàng già giữa sân trường vào buổi chiều tà.</strong>
+    </p>
+    <div class="obs-grid">
+      <div class="obs-card">
+        <div class="q">Em nhìn thấy gì?</div>
+        <div class="a">Cây bàng già đứng sừng sững, tán lá xòe rộng như chiếc ô khổng lồ. Lá xanh đậm khẽ lay động trong gió chiều, bóng cây đổ dài thành những mảng sáng tối đan xen trên nền sân gạch đỏ.</div>
+      </div>
+      <div class="obs-card">
+        <div class="q">Màu sắc ra sao?</div>
+        <div class="a">Lá bàng xanh đậm, một vài chiếc chuyển đỏ cam như sắp rụng. Ánh nắng chiều vàng nhạt lọc qua kẽ lá tạo đốm sáng lấp lánh. Bầu trời pha sắc xanh lam và vàng cam sau tán cây.</div>
+      </div>
+      <div class="obs-card">
+        <div class="q">Âm thanh thế nào?</div>
+        <div class="a">Tiếng lá xào xạc khẽ khàng như thì thầm. Thỉnh thoảng một con chim sẻ ríu rít trong tán. Vẳng lại tiếng cười nói của các bạn tan trường hòa với tiếng guốc dép trên sân gạch.</div>
+      </div>
+      <div class="obs-card">
+        <div class="q">Cảm giác của em?</div>
+        <div class="a">Bình yên và thư thái lạ thường. Giữa bộn bề bài vở, đứng dưới bóng cây bàng như được chìm vào khoảnh khắc tĩnh lặng riêng tư — bâng khuâng, không muốn rời đi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHẦN 2 -->
+  <div class="section">
+    <div class="section-title" data-num="II">Phần 2 — Cảm Nhận</div>
+    <div class="poem-wrapper">
+      <div class="poem-title">Cây Bàng Chiều</div>
+      <div class="poem-line">Cây bàng già đứng im giữa buổi chiều đang tan,</div>
+      <div class="poem-line">Những chiếc lá thì thầm điều gì với gió —</div>
+      <div class="poem-line">Nắng rơi qua kẽ lá thành từng mảnh vàng vỡ,</div>
+      <div class="poem-line">Và em đứng đây — quên mất mình đang vội.</div>
+      <div class="poem-type">Thơ tự do · Cách 2</div>
+    </div>
+  </div>
+
+  <!-- PHẦN 3 -->
+  <div class="section">
+    <div class="section-title" data-num="III">Phần 3 — Kết Nối Thơ Ca</div>
+
+    <div class="qa-item">
+      <div class="qa-q"><span class="num">1.</span> Hình ảnh trong đoạn thơ có giống điều em vừa quan sát không?</div>
+      <div class="qa-a">Có. Cả hai đều hướng đến những sự vật nhỏ bé, bình dị trong thiên nhiên — chiếc lá, làn gió, ánh nắng — nhưng được nhìn bằng con mắt chú tâm và trái tim nhạy cảm. Điểm chung nổi bật nhất là khoảnh khắc giao thoa giữa cảnh vật và cảm xúc người quan sát: một hình ảnh bình thường bỗng trở nên có hồn và đầy ý nghĩa.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q"><span class="num">2.</span> Vì sao thơ có thể làm cảnh vật trở nên đẹp hơn?</div>
+      <div class="qa-a">Thơ không chỉ miêu tả bằng mắt mà còn cảm nhận bằng trái tim. Khi nhà thơ nhìn chiếc lá rung trong gió, họ không thấy đơn thuần là chiếc lá — họ thấy nỗi thì thầm, sự sống, một khoảnh khắc không trở lại. Thơ dùng ngôn từ chọn lọc và nhịp điệu riêng để kéo người đọc ra khỏi sự thờ ơ thường ngày, buộc họ phải thực sự "nhìn". Vì thế, cùng một cảnh vật, qua thơ bỗng trở nên sâu sắc và lay động hơn.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q"><span class="num">3.</span> Theo em, điều gì biến một cảnh vật bình thường thành thơ?</div>
+      <div class="qa-a">Chính là cảm xúc và sự chú tâm của người nhìn. Cùng một cây bàng, người vội vã đi qua chỉ thấy bóng cây; người dừng lại, lắng nghe và cảm nhận sẽ thấy cả một thế giới sống động trong đó. Thơ ra đời khi trái tim ta chạm vào cảnh vật và tìm thấy điều gì đó vượt ra ngoài vẻ ngoài — một nỗi niềm, một kỷ niệm, hay đơn giản là khoảnh khắc bình yên quý giá. Sự liên tưởng, tình cảm và cái nhìn tinh tế chính là chìa khóa biến điều bình thường thành thơ.</div>
+    </div>
+  </div>
+
+  <div class="footer">Hết bài thực hành</div>
+</div>
+</body>
+</html>
